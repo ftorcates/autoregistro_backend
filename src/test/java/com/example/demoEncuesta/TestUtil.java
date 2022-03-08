@@ -1,8 +1,14 @@
 package com.example.demoEncuesta;
 
+import java.util.ArrayList;
 import java.util.Random;
 
+import com.example.demoEncuesta.models.requests.AnswerCreationRequestModel;
+import com.example.demoEncuesta.models.requests.PollCreationRequestModel;
+import com.example.demoEncuesta.models.requests.QuestionCreationRequestModel;
 import com.example.demoEncuesta.models.requests.UserRegisterRequestModel;
+
+import org.apache.tomcat.jni.Poll;
 
 public class TestUtil {
     public static UserRegisterRequestModel createValidUser(){
@@ -13,6 +19,29 @@ public class TestUtil {
         user.setPassword(generateRandomString(8));    
 
         return user;
+    }
+
+    //crear encuesta valida
+    public static PollCreationRequestModel createValidPoll(){
+        ArrayList<AnswerCreationRequestModel> answers = new ArrayList<>();
+        AnswerCreationRequestModel answer = new AnswerCreationRequestModel();
+        answer.setContent(generateRandomString(30));
+        answers.add(answer);
+
+        ArrayList<QuestionCreationRequestModel> questions = new ArrayList<>();
+        QuestionCreationRequestModel question = new QuestionCreationRequestModel();
+        question.setContent(generateRandomString(30));
+        question.setQuestionOrder(1);
+        question.setType("CHECKBOX");
+        question.setAnswers(answers);
+        questions.add(question);
+
+        PollCreationRequestModel poll = new PollCreationRequestModel();
+        poll.setContent(generateRandomString(30));
+        poll.setOpened(true);
+        poll.setQuestions(questions);
+
+        return poll;
     }
 
     //Genera string aleatorios
