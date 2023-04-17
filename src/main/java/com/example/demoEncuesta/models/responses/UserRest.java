@@ -7,9 +7,13 @@ public class UserRest {
     
     private long id;
 
+    private String username;
+
     private String name;
 
     private String email;
+
+    private long role_id;
 
     public Long getId() {
         return id;

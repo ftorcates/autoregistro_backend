@@ -36,7 +36,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 
             UserLoginRequestModel userModel = new ObjectMapper().readValue(request.getInputStream(), UserLoginRequestModel.class);
 
-            return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userModel.getEmail(), userModel.getPassword(), new ArrayList<>()));
+            return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userModel.getUsername(), userModel.getPassword(), new ArrayList<>()));
         
         } catch (IOException exception){
             throw new RuntimeException(exception);
@@ -46,11 +46,12 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter{
     @Override
     public void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws AuthenticationException, IOException{
 
-        String email = ((User) authentication.getPrincipal()).getUsername();
+        //String email = ((User) authentication.getPrincipal()).getUsername();
+        String username = ((User) authentication.getPrincipal()).getUsername();
 
         //generar token
         String token = Jwts.builder()
-            .setSubject(email).setExpiration(new Date(System.currentTimeMillis() + SecurityConstants.EXPIRATION_DATE))
+            .setSubject(username).setExpiration(new Date(System.currentTimeMillis() + SecurityConstants.EXPIRATION_DATE))
             .signWith(SignatureAlgorithm.HS512, SecurityConstants.getTokenSecret()).compact();
 
         //para mostra el token en el response

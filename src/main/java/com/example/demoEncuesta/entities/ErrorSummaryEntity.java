@@ -13,32 +13,27 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.example.demoEncuesta.enums.QuestionType;
-
 import lombok.Data;
 
-@Entity(name = "questions")
+@Entity(name="errorSummary")
 @Data
-public class QuestionEntity {
+public class ErrorSummaryEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false, length = 255)
-    private String content;
-
     @Column
-    private int questionOrder;
+    private String summary_description;
+
+    @Column 
+    private String info_adicional;
+
+    @ManyToOne
+    @JoinColumn(name = "error_id")
+    private ErrorEntity error;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "errorSummary")
+    private List<ReportEntity> reports = new ArrayList<>();
     
-    @Column
-    private QuestionType type;
-
-    @ManyToOne 
-    @JoinColumn(name = "poll_id")
-    private PollEntity poll;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "question")
-    private List<AnswerEntity> answers = new ArrayList<>();
-
 }

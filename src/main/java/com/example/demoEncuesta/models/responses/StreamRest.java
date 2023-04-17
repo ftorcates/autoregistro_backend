@@ -4,8 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-//Para generar un constructor que acepte todos los datos
 @AllArgsConstructor
-public class CreatedPollRest {
-    private String pollId;
+public class StreamRest {
+    
+    private long idStream;
+
+    private String descriptionStream;
+
+    public StreamRest(){}
 }

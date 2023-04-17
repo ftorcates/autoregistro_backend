@@ -16,6 +16,9 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(nullable = false, length = 20)
+    private String username;
+
     @Column(nullable = false, length = 255)
     private String name;
 
@@ -24,6 +27,9 @@ public class UserEntity {
 
     @Column(nullable = false)
     private String encryptedPassword;
+
+    @Column(nullable = false)
+    private String role;
 
     public Long getId() {
         return id;

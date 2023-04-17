@@ -5,8 +5,13 @@ import javax.validation.constraints.NotEmpty;
 import lombok.Data;
 
 @Data
-public class AnswerCreationRequestModel {
+public class ErrorSummaryRequestModel {
     
+    
+    private long errorId;
+
     @NotEmpty
-    private String content;
+    private String summaryDescription;
+
+    private String infoAdicional;
 }

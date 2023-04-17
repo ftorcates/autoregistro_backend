@@ -12,6 +12,9 @@ import lombok.Data;
 public class UserRegisterRequestModel {
     
     @NotEmpty
+    private String username;
+
+    @NotEmpty
     private String name;
 
     @NotEmpty
@@ -22,6 +25,9 @@ public class UserRegisterRequestModel {
     @NotEmpty
     @Size(min = 8, max = 40)
     private String password;
+
+    @NotEmpty
+    private String role;
 
     public String getName() {
         return name;

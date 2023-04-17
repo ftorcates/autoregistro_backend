@@ -8,9 +8,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface UserService extends UserDetailsService{
 
-    public UserDetails loadUserByUsername(String email);
+   //public UserDetails loadUserByUsername(String email);
+   public UserDetails loadUserByUsername(String username);
 
-    public UserEntity getUser(String email);
+    public UserEntity getUser(String username);
     
     public UserEntity createUser(UserRegisterRequestModel user);
 }

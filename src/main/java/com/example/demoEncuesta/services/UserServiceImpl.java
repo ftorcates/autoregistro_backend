@@ -39,18 +39,20 @@ public class UserServiceImpl implements UserService {
     
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        UserEntity userEntity = userRepository.findByEmail(email);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        //UserEntity userEntity = userRepository.findByEmail(email);
+        UserEntity userEntity = userRepository.findByUsername(username);
 
         if (userEntity == null){
-            throw new UsernameNotFoundException(email);
+            throw new UsernameNotFoundException(username);
         }
-        return new User(userEntity.getEmail(), userEntity.getEncryptedPassword(), new ArrayList<>());
+       // return new User(userEntity.getEmail(), userEntity.getEncryptedPassword(), new ArrayList<>());
+       return new User(userEntity.getUsername(), userEntity.getEncryptedPassword(), new ArrayList<>());
     }
 
     @Override
-    public UserEntity getUser(String email) {   
-        return userRepository.findByEmail(email);
+    public UserEntity getUser(String username) {   
+        return userRepository.findByUsername(username);
     }
     
 }

@@ -27,8 +27,11 @@ public class WebSecurity extends WebSecurityConfigurerAdapter{
         http.cors().and().csrf().disable();
         
         //para agregar endpoints que no necesitan autorización
-        http.authorizeRequests().antMatchers(HttpMethod.POST, "/users")
-            .permitAll().anyRequest().authenticated();
+        //endpoints /users y /polls/**/questions son PUBLICOS */
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/users").permitAll()
+        //.antMatchers(HttpMethod.POST, "/polls/reply").permitAll()
+        //.antMatchers(HttpMethod.GET, "/polls/**/questions").permitAll()
+        .anyRequest().authenticated();
 
         http.addFilter(getAuthenticationFilter())
             .addFilter(new AuthorizationFilter(authenticationManager()))

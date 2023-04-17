@@ -23,6 +23,9 @@ public class UserController {
     @Autowired
     UserService userService;
     
+    //PostMapping es para indicar que es un metodo POST
+    //RequestBody es para indicar que recibirá un request
+    //Valid para indicar que tendrá validaciones en los campos recibidos
     @PostMapping()
     public UserRest createUser(@RequestBody @Valid UserRegisterRequestModel userModel) {
         
